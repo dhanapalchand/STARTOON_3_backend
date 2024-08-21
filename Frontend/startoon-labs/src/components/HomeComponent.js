@@ -28,6 +28,7 @@ const UserTable = () => {
       fetchUsers();
   }, [user]);
 
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -37,12 +38,13 @@ const UserTable = () => {
         <h2>User List</h2>
         <table className="table table-bordered">
           <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Count</th>
-              <th>Last Login Date</th>
+            <tr >
+              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>S.No</th>
+              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Name</th>
+              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Email</th>
+              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Count</th>
+              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Last Login Date</th>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Last Login Time</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +55,7 @@ const UserTable = () => {
                 <td>{user.email}</td>
                 <td>{user.count}</td>
                 <td>{new Date(user.lastLogin).toLocaleDateString()}</td>
+                <td>{new Date(user.lastLogin).toLocaleTimeString()}</td>
               </tr>
             ))}
           </tbody>
