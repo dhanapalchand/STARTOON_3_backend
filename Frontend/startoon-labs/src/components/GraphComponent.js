@@ -24,28 +24,40 @@ const Stats = () => {
 
     useEffect(() => {
         const fetchStats = async () => {
-            try {
-                if (user.user.email === 'admin@email.com') {
-                    const userResponse = await axios.get('http://localhost:8000/AllUser');
-                    const users = userResponse.data;
-                    console.log('Users:', users);
-                    const totalCount = users.length;
-                    setTotalCount(totalCount);
-                    const allUserCount = users.reduce((sum, user) => sum + (user.count || 0), 0);
-                    setAllUserCount(allUserCount);
-                    console.log('Users:', allUserCount);
-                    const response = await axios.get('http://localhost:8000/api/stats');
-                    const { monthlyData, dateWiseData } = response.data;
-                    setMonthlyData(monthlyData);
-                    setDateWiseData(dateWiseData);
+          try {
+            if (user && user.user.email === 'admin@email.com') {
+              const userResponse = await axios.get('http://localhost:8000/AllUser', {
+                headers: {
+                  Authorization: `Bearer ${user.token}` // Add the auth token to the request headers
                 }
-            } catch (error) {
-                console.error('Failed to fetch stats:', error);
+              });
+              const users = userResponse.data;
+              console.log('Users:', users);
+              
+              const totalCount = users.length;
+              setTotalCount(totalCount);
+              
+              const allUserCount = users.reduce((sum, user) => sum + (user.count || 0), 0);
+              setAllUserCount(allUserCount);
+              console.log('All User Count:', allUserCount);
+              
+              const response = await axios.get('http://localhost:8000/api/stats', {
+                headers: {
+                  Authorization: `Bearer ${user.token}` // Add the auth token to the request headers
+                }
+              });
+              
+              const { monthlyData, dateWiseData } = response.data;
+              setMonthlyData(monthlyData);
+              setDateWiseData(dateWiseData);
             }
+          } catch (error) {
+            console.error('Failed to fetch stats:', error);
+          }
         };
-
+    
         fetchStats();
-    }, []);
+      }, []);
 
 
     const chartData = isYearWise

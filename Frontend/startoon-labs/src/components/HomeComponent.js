@@ -7,24 +7,25 @@ const UserTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useContext(authContext);
+  console.log(user);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/AllUser');
-        setUsers(response.data);
-      } catch (error) {
-        setError('Failed to fetch users');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (user && user.user.email === 'admin@email.com') {
+        try {
+          const response = await axios.get('http://localhost:8000/AllUser', {
+            headers: {
+              Authorization: `Bearer ${user.token}` 
+            }
+          });
+          setUsers(response.data);
+        } catch (error) {
+          setError('Failed to fetch users');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
       fetchUsers();
-    } else {
-      setLoading(false); // Ensure loading state is turned off when not admin
-    }
   }, [user]);
 
   if (loading) return <p>Loading...</p>;
