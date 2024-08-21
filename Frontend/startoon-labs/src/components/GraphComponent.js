@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
 import { authContext } from '../hooks/authContext';
+import { API_URL } from "./env";
 
 ChartJS.register(
     Title,
@@ -26,24 +27,24 @@ const Stats = () => {
         const fetchStats = async () => {
           try {
             if (user && user.user.email === 'admin@email.com') {
-              const userResponse = await axios.get('http://localhost:8000/AllUser', {
+              const userResponse = await axios.get(`${API_URL}/AllUser`, {
                 headers: {
-                  Authorization: `Bearer ${user.token}` // Add the auth token to the request headers
+                  Authorization: `Bearer ${user.token}` 
                 }
               });
               const users = userResponse.data;
-              console.log('Users:', users);
+            //   console.log('Users:', users);
               
               const totalCount = users.length;
               setTotalCount(totalCount);
               
               const allUserCount = users.reduce((sum, user) => sum + (user.count || 0), 0);
               setAllUserCount(allUserCount);
-              console.log('All User Count:', allUserCount);
+            //   console.log('All User Count:', allUserCount);
               
-              const response = await axios.get('http://localhost:8000/api/stats', {
+              const response = await axios.get(`${API_URL}/api/stats`, {
                 headers: {
-                  Authorization: `Bearer ${user.token}` // Add the auth token to the request headers
+                  Authorization: `Bearer ${user.token}` 
                 }
               });
               

@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { authContext } from '../hooks/authContext';
+import { API_URL } from "./env";
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useContext(authContext);
-  console.log(user);
 
   useEffect(() => {
     const fetchUsers = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/AllUser', {
+          const response = await axios.get(`${API_URL}/AllUser`, {
             headers: {
               Authorization: `Bearer ${user.token}` 
             }
