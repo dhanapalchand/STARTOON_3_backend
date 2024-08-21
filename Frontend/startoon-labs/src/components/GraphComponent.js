@@ -15,7 +15,7 @@ ChartJS.register(
     PointElement
 );
 
-const Stats = () => {
+const GraphComponent= () => {
     const [totalCount, setTotalCount] = useState(0);
     const [allUserCount, setAllUserCount] = useState(0);
     const [monthlyData, setMonthlyData] = useState([]);
@@ -129,4 +129,4 @@ const Stats = () => {
     );
 };
 
-export default Stats;
+export default GraphComponent;

@@ -7,7 +7,7 @@ import logo from "../images/startoon_logo.png";
 import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
 
-function Login() {
+function LoginComponent() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
@@ -127,4 +127,4 @@ function Login() {
   );
 };
 
-export default Login;
+export default LoginComponent;

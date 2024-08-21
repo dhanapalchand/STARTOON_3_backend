@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+    .table thead {
+      display: none;
+    }
+  
+    .table tbody tr {
+      display: block;
+      margin-bottom: 10px;
+    }
+  
+    .table tbody td {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem;
+      border: none;
+      border-bottom: 1px solid #dee2e6;
+    }
+  
+    .table tbody td::before {
+      content: attr(data-label);
+      font-weight: bold;
+    }
+  
+    .table tbody td:last-child {
+      border-bottom: 0;
+    }
+  }
+  

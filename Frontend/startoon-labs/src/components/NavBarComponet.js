@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { SidebarData } from './NavBarData';
 import { authContext } from '../hooks/authContext';
 
-const TopNavBarComponent = ({ onLogout }) => {
+const NavBarComponent = ({ onLogout }) => {
   const [isNavOpen, setIsNavOpen] = useState(false); 
   const [searchQuery, setSearchQuery] = useState('');
   const { user } = useContext(authContext);
@@ -61,4 +61,4 @@ const TopNavBarComponent = ({ onLogout }) => {
   );
 };
 
-export default TopNavBarComponent;
+export default NavBarComponent;

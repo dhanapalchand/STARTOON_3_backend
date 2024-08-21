@@ -6,7 +6,7 @@ import { IonIcon } from '@ionic/react';
 import { eyeOutline, eyeOffOutline } from 'ionicons/icons';
 import logo from "../images/startoon_logo.png";
 
-export default function RegistrationComponent() {
+export default function SignUpComponent() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

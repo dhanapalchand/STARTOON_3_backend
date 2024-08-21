@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { authContext } from '../hooks/authContext';
 import { API_URL } from "./env";
+import '../css/Table.css'
 
-const UserTable = () => {
+const HomeComponent = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,32 +36,34 @@ const UserTable = () => {
   if (user && user.user.email === 'admin@email.com') {
     return (
       <div className="container mt-4">
-        <h2>User List</h2>
+      <h2>User List</h2>
+      <div className="table-responsive"> {/* This class makes the table scrollable on smaller screens */}
         <table className="table table-bordered">
           <thead>
-            <tr >
-              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>S.No</th>
-              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Name</th>
-              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Email</th>
-              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Count</th>
-              <th style={{ backgroundColor: "	#1E90FF", color: "white" }}>Last Login Date</th>
+            <tr>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>S.No</th>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Name</th>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Email</th>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Count</th>
+              <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Last Login Date</th>
               <th style={{ backgroundColor: "#1E90FF", color: "white" }}>Last Login Time</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={user._id}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.count}</td>
-                <td>{new Date(user.lastLogin).toLocaleDateString()}</td>
-                <td>{new Date(user.lastLogin).toLocaleTimeString()}</td>
-              </tr>
-            ))}
-          </tbody>
+  {users.map((user, index) => (
+    <tr key={user._id}>
+      <td data-label="S.No">{index + 1}</td>
+      <td data-label="Name">{user.name}</td>
+      <td data-label="Email">{user.email}</td>
+      <td data-label="Count">{user.count}</td>
+      <td data-label="Last Login Date">{new Date(user.lastLogin).toLocaleDateString()}</td>
+      <td data-label="Last Login Time">{new Date(user.lastLogin).toLocaleTimeString()}</td>
+    </tr>
+  ))}
+</tbody>
         </table>
       </div>
+    </div>
     );
   } else if (user) {
     return (
@@ -86,4 +89,4 @@ const UserTable = () => {
   }
 };
 
-export default UserTable;
+export default HomeComponent;
